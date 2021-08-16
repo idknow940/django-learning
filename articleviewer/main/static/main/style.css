@@ -1,0 +1,38 @@
+body{
+    background-color: gray;
+    color: white;
+}
+::selection{
+    background-color: white;
+    color: gray;
+}
+
+.button{
+  background-color: lightgray;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 10px 10px 10px;
+  cursor: pointer;
+}
+.title{
+  font-size: 24px;
+}
+.article-row{
+  background-color: lightgray;
+  color: black;
+  border-radius: 10px;
+  border: 2px solid white;
+  padding: 2px;
+}
+a{
+  text-decoration: none;
+  color: white;
+}
+nav{
+  border-bottom: 2px solid;
+}

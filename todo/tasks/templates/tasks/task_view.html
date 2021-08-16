@@ -1,0 +1,22 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<div class="center-column">
+	<div class="todo-list">
+	<h3>Task</h3>
+		<h2><strong>{{ task.name }}</strong></h2>
+		<br>
+		<br>
+		<h2>{{ task.desc }}</h2>
+		<br>
+		<h2>{{ task.created_at.date }}</h2>
+		<br>
+		<h2>{{ task.get_status_display }}</h2>
+		<br>
+
+	<a class="btn btn-sm btn-info" href="#">Update</a>
+		<a class="btn btn-sm btn-danger" href="{% url 'task_delete' task.id %}">Delete</a>
+
+	</div>
+</div>
+{% endblock %}

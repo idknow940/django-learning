@@ -1,4 +1,4 @@
-from django.shortcuts import HttpResponse
+from django.shortcuts import HttpResponse, render
 from django.utils import timezone
 from .models import Task
 import json
@@ -9,9 +9,8 @@ def hello(request):
     return HttpResponse("""<h1><b><u><i><s>Hello World!</s></i></u></b></h1>""")
 
 
-def my_name(request):
-    return HttpResponse(
-        """"<h1>My name is <i>MAINDOTPY</i></h1>""")
+def home(request):
+    return render(request, "firstapp/homepage.html")
 
 
 def daytime(request):
@@ -21,12 +20,7 @@ def daytime(request):
 
 def list_tasks(request):
     tasks = Task.objects.all()
-    html = f"""
-    <h2>tasks</h2>
-    <h3>tasks: {tasks[0]}</h3>
-    <h3>tasks: {tasks[1]}</32>
-    """
-    return HttpResponse(html)
+    return render(request, "firstapp/list_tasks.html", {"task_list": tasks})
 
 
 def ret_dict_square(request):

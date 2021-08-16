@@ -1,0 +1,13 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<a href="{% url 'create-a' %}"><button class="button">Create Article</button></a>
+
+{% for article in articles %}
+<div class="article-row">
+    <p><span class="title">{{ article.title }}</span> | {{ article.created_at }}</p>
+    <p>{{ article.article }}</p>
+    <a href="{% url 'delete-a' article.id %}"><button class="button">Delete Article</button></a>
+</div>
+<br>
+{% endfor %}
+{% endblock %}

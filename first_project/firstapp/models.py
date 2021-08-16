@@ -14,4 +14,4 @@ class Task(models.Model):
     status = models.IntegerField(choices=STATUS_CHOICES, default=0)
 
     def __str__(self):
-        return f"{self.name} - {self.created_at} - {self.status}"
+        return f"{self.name} | {self.status} | {self.created_at}"

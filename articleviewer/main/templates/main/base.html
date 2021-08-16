@@ -1,0 +1,16 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <title>Articles</title>
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+</head>
+<nav>
+    <h1><a href="{% url 'home' %}">ArticleViewer</a></h1>
+</nav>
+<body>
+<br>
+{% block content %}
+{% endblock %}
+</body>
+</html>

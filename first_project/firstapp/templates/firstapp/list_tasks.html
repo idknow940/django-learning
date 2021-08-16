@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Tasks</title>
+    <style>
+        ::selection{
+            background-color: orange;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1 class=hello>Add Tasks</h1>
+
+    <h1 class=hello>These are the tasks</h1>
+    {% for task in task_list %}
+        {% if task.status == 0 %}
+            <h2 style="color: red;">{{ task }}</h2><br>
+        {% elif task.status == 1 %}
+            <h2 style="color: yellow;">{{ task }}</h2><br>
+        {% elif task.status == 2 %}
+            <h2 style="color: green;">{{ task }}</h2><br>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,19 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<div class="center-column">
+	<div class="todo-list">
+	<h3>Tasks</h3>
+		{% for task in tasks %}
+		<div class="item-row">
+			<a class="btn btn-sm btn-info" href="{% url 'task_update' task.id %}">Update</a>
+			<a class="btn btn-sm btn-danger" href="{% url 'task_delete' task.id %}">Delete</a>
+			<a href="{% url 'task_view' task.id %}" target="_blank">{{ task.name }}</a>
+		</div>
+		{% endfor %}
+		<div class="item-row">
+			<a href="{% url 'task_make' %}" target="_blank"><button class="btn btn-success" type="button" name="Create Task">Create</button></a>
+		</div>
+	</div>
+</div>
+{% endblock %}
