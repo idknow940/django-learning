@@ -6,7 +6,16 @@
 <div class="article-row">
     <p><span class="title">{{ article.title }}</span> | {{ article.created_at }}</p>
     <p>{{ article.article }}</p>
-    <a href="{% url 'delete-a' article.id %}"><button class="button">Delete Article</button></a>
+    <a href="{% url 'delete-a' article.id %}"><button>Delete</button></a>
+    <a href="{% url 'comment-a' article.id %}"><button>Comment</button></a>
+    {% for comment in comments %}
+        {% if comment.comment_id.id == article.id %}
+            <div class="comment-row">
+                <h4>{{ comment.comment }}</h4>
+                <a href="{% url 'delete-c' comment.id %}"><button>Delete</button></a>
+            </div>
+        {% endif %}
+    {% endfor %}
 </div>
 <br>
 {% endfor %}

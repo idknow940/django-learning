@@ -9,3 +9,12 @@ class Article(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.created_at}"
+
+
+class Comment(models.Model):
+    comment = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    comment_id = models.ForeignKey(Article, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.comment

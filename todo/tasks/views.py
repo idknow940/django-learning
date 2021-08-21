@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Task
-from .forms import TaskCreateForm
+from .forms import TaskCreateForm, TaskCreateCustomForm
 
 
 def get_home_page(request):
@@ -37,6 +37,20 @@ def create_task(request):
         form = TaskCreateForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('home')
+    context = {'form': form}
+    return render(request, 'tasks/new_task.html', context)
+
+
+def create_c_task(request):
+    form = TaskCreateCustomForm()
+    if request.method == 'POST':
+        print(request.POST)
+        form = TaskCreateCustomForm(request.POST)
+        if form.is_valid():
+            # TODO ADD SAVE
+            data = form.cleaned_data
+            Task.objects.create(**data)
             return redirect('home')
     context = {'form': form}
     return render(request, 'tasks/new_task.html', context)
