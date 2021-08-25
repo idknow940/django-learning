@@ -8,6 +8,7 @@ class TaskCreateForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = '__all__'
+        exclude = ('user', )
 
 
 class TaskCreateCustomForm(forms.Form):

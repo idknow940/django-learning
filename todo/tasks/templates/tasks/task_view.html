@@ -15,9 +15,8 @@
 		<h2>{{ task.get_status_display }}</h2>
 		<br>
 
-	<a class="btn btn-sm btn-info" href="#">Update</a>
+	<a class="btn btn-sm btn-info" href="{% url 'task_update' task.id %}">Update</a>
 		<a class="btn btn-sm btn-danger" href="{% url 'task_delete' task.id %}">Delete</a>
-
 	</div>
 </div>
 {% endblock %}

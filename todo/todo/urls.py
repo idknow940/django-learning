@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('tinymce', include('tinymce.urls')),
     path('', include('tasks.urls')),
-
+    path('user/', include('user.urls'))
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

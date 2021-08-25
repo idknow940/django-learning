@@ -1,0 +1,12 @@
+{% extends 'tasks/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="center-column">
+    <h1>{{ profile.user }}</h1>
+    <h4>Age: {{ profile.age }}</h4>
+    <h4>Fields: {{ profile.field }}</h4>
+    Bio: {{ profile.bio }}<br><br>
+    <a class="btn btn-info" href="{% url 'update_profile' request.user.id %}">Update Profile</a>
+</div>
+{% endblock %}

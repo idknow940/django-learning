@@ -2,11 +2,11 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="center-column">
-	<h3>Update Task</h3>
+	<h3>Register</h3>
 	<form method="POST">
 		{% csrf_token %}
 		{{ form|crispy }}
-		<input class="btn btn-info" type="submit" name="Update Task">
+		<input class="btn btn-info" type="submit" name="create" value="Sign Up">
 	</form>
 </div>
 {% endblock %}
