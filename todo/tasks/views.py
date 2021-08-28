@@ -65,14 +65,19 @@ def create_c_task(request):
 @login_required
 def update_task(request, task_id):
     try:
-        task_obj = Task.objects.get(id=task_id, user_id=request.user.id)
+        task = Task.objects.get(id=task_id, user_id=request.user.id)
     except Task.DoesNotExist:
         return redirect('home')
-    form = TaskCreateForm(instance=task_obj)
+    form = TaskCreateForm(instance=task)
     if request.method == 'POST':
-        form = TaskCreateForm(request.POST, instance=task_obj)
+        form = TaskCreateForm(request.POST, instance=task)
         print(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('task_view', task_id=task_id)
+            task = form.save(commit=False)
+            task.user = request.user
+            task = form.save(commit=False)
+            if request.FILES.get('image', None) is not None:
+                task.image = request.FILES['image']
+            task.save()
+            return redirect('task_view', task_id)
     return render(request, 'tasks/task_update.html', {'form': form})

@@ -3,7 +3,7 @@
 {% block content %}
 <div class="center-column">
 	<h3>Update Task</h3>
-	<form method="POST">
+	<form method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
 		{{ form|crispy }}
 		<input class="btn btn-info" type="submit" name="Update Task">
