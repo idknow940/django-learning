@@ -7,7 +7,7 @@ class Task(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
-    image = models.ImageField(upload_to="task_images", default="/tasks/images/default.png")
+    image = models.ImageField(upload_to="task_images", default="default/default.png")
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS_CHOICE, default=0)
 

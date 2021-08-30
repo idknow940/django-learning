@@ -2,12 +2,68 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import Task
 from .forms import TaskCreateForm, TaskCreateCustomForm
+from django.views.generic import View, ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 @login_required
 def get_home_page(request):
     tasks = Task.objects.filter(user_id=request.user.id)
     return render(request, 'tasks/home.html', {"tasks": tasks})
+
+
+@login_required
+class TaskView(View):
+    template_name = 'tasks/home.html'
+
+    def get(self, request):
+        tasks = Task.objects.filter(user_id=self.request.user.id)
+        return render(self.request, self.template_name, {"tasks": tasks})
+
+
+class TaskListView(LoginRequiredMixin, ListView):
+    model = Task
+    template_name = 'tasks/home.html'
+    context_object_name = 'tasks'
+
+    # queryset = Task.objects.filter(user_id=self.request.user.id)
+    def get_queryset(self):
+        return super().get_queryset().filter(user_id=self.request.user)
+
+
+class TaskDetailView(LoginRequiredMixin, DetailView):
+    model = Task
+
+    def get_context_data(self, **kwargs):
+        context = {
+            'task_id': self.object.id,
+            'task': self.object,
+        }
+        return context
+
+
+class TaskCreateView(View):
+    form = TaskCreateForm
+
+    def get(self, request):
+        form = self.form()
+        context = {'form': form}
+        return render(request, 'tasks/new_task.html', context)
+
+    def post(self, request):
+        form = self.form(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.user = request.user
+            form.save()
+            return redirect('home')
+
+
+class NewTaskCreateView(CreateView):
+    form_class = TaskCreateForm
+    model = Task
+    template_name = 'tasks/new_task.html'
+    success_url = '/'
 
 
 @login_required
